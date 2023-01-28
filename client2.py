@@ -50,7 +50,8 @@ def receive_socket(client_socket, data):
             if success_block.tag == "success":
                 return
             success_block.tag = "success"
-            success_block.cnt = 3
+            with q_lock:
+                success_block.cnt = 4
             tolc.receive_event(other_clock)
             print("Now clock: ", str(tolc.get_time()))
             print("tag a success block: " + success_block.transactions)

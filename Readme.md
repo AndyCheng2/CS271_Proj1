@@ -61,3 +61,10 @@ class Blockchain:
 2. Using the multi-threads to handle the user inputs and received messages, like message_queue, and mutex to handler data synchrinization
 3. Providing as many functions as possible and use them to program sufficiently, like in blockchain, I provide `find_block()` , `find_first_pending_block()`, `print_chain()` , `find_block()`, to help me to code
 4. Helpful script to handler the repetitive work, like `init.py` and `auto.py`
+
+## Demo Bug fixed
+When the demo time, there is a bug that when we get the first in queue and get other's reply, and when we do the transaction, sometimes(especially have many other messages) multi-thread will do the transaction twice, and it leading to a problem that balance table number is different from the blockchain log(in blockchain it only log transaction once).
+
+I fixed this bug after the demo(don't have time in demo), it happens because when I tag the block as a success block, other threads, which is doing the detecting job like detecting if my sending request get other clients' reply, will all get into the transaction and do transactions twice even three times
+
+I fixed it by changing the detecting condition, now it works smoothly
